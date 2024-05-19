@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+    web:
+        build: .
+        environment:
+            TZ: Japan
+            VIRTUAL_HOST: dev-article-creator.test
+        volumes:
+            - ./:/app:cached
+            - /app/.git
+    cli:
+        build: .
+        environment:
+            TZ: Japan
+        volumes:
+            - ./:/app
+
+volumes:
+    db-data:
+
+networks:
+  default:
+    external: true
+    name: myproject_network
